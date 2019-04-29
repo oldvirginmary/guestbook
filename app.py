@@ -20,10 +20,10 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
 
-# # Show all reviews
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
+# Show all reviews
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 # Get all reviews
 @app.route('/review', methods=['GET'])
@@ -54,9 +54,10 @@ def create_comment():
         result = reviews_schema.dump(reviews)
         return jsonify(result.data)
     else:
-        result = {'status': 'error'}
+        result = jsonify({'status': 'error'})
         result.status_code = 500
-        return jsonify(result)
+        print(form.data)
+        return result
 
 # Run server
 if __name__ == '__main__':
