@@ -1,6 +1,16 @@
 'use strict';
 
+
 (function (window, document, $) {
+    function niceDateTime(rawTime) {
+        var dateAndTime = rawTime.split('T');
+        var date = dateAndTime[0].split('-').reverse().join('/');
+        var time = dateAndTime[dateAndTime.length - 1].split('+')[0].split(':').splice(0, 2).join(':');
+
+        return date + ' ' + time;
+    }
+
+
     function getReviews() {
         var results = $('.reviews');
 
@@ -18,7 +28,7 @@
                 var title = $('<h3>').addClass('title card-title').text(data[i].title);
                 var content = $('<p>').addClass('content card-text').text(data[i].content);
                 var time = $('<p>').addClass('time card-text');
-                time.append($('<span>').addClass('text-muted').text(data[i].time));
+                time.append($('<span>').addClass('text-muted').text(niceDateTime(data[i].time)));
 
                 review.append(title);
                 review.append(content);
@@ -52,9 +62,10 @@
         })
 
         request.fail(function(jqXHR, textStatus, errorThrown) {
-            alert('request fail');
+            alert('Server error!');
         })
     }
+
 
     function postReview() {
         var titleField = $('#input-title').val()
@@ -96,10 +107,9 @@
         })
 
         request.fail(function(jqXHR, textStatus, errorThrown) {
-            alert('fail!');
+            alert('Incorrect form!');
         })
     }
-
 
 
     $(document).ready(function() {

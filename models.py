@@ -8,4 +8,4 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(255), nullable=False)
     content = db.Column(db.String(3000), nullable=False)
-    time = db.Column(db.DateTime, default=datetime.utcnow)
+    time = db.Column(db.DateTime, default=datetime.now)
