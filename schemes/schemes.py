@@ -2,7 +2,7 @@
 
 from app import ma
 
-# Scheme for jsonify responds
+# Scheme for jsonify responses
 class ReviewSchema(ma.Schema):
     class Meta:
         fields = ('id', 'title', 'content', 'time')
